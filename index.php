@@ -3,13 +3,6 @@ require_once ("class.SimpleXLSX.php");
 require_once ("db.settings.php");
 require_once ("class.db.php");
 
-// create connection
-
-$connection = mysqli_connect('localhost', 'root', '123456', 'streamliner');
-
-if(mysqli_connect_errno()){
-	echo 'failed to connect to mysql' . mysqli_connect_errno();
-}
 
 $target_file = "Missing.Adapters.in.Streamliner.-.2.xlsx";
 
@@ -32,15 +25,13 @@ foreach ($adapters_data as $adapter_owners_info)
 
 #print($component_model_category_id);
 
+#write if statement that will check for the model_vendor and model_type and get the ID 
+
+$sql_component_select = "SELECT id FROM m_product_models WHERE model LIKE '%{$component_model}%'";
+
 $insertQuery = "INSERT INTO `m_product_models` (`id`, `model`, `model_std`, `catalog_name`, `pid`, `model_product_category_id`) VALUES (NULL, '{$component_model}', '{$component_model_std}', '{$component_catalog_name}', '{$component_pid}', 1)";
 
 
 db::get()->query($insertQuery);
-/*
-if(mysqli_query($connection, $insertQuery)){
-	echo 'success!';
-} else {
-	echo 'error!';
-}
-*/
-#die($insertQuery);
+
+echo "done!";
