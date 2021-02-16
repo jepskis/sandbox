@@ -33,5 +33,5 @@ $insertQuery = "INSERT INTO `m_product_models` (`id`, `model`, `model_std`, `cat
 
 
 db::get()->query($insertQuery);
-
+#die($insertQuery);
 echo "done!";
